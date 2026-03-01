@@ -60,7 +60,7 @@ export default function UploadPanel({
       const formData = new FormData();
       formData.append("file", file);
 
-      const res = await fetch("http://127.0.0.1:8000/api/v1/upload", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_AGENT_API}/upload`, {
         method: "POST",
         body: formData,
       });
