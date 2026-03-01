@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+:root {
+  --bg-page:        #0f1117;
+  --bg-sidebar:     #161b27;
+  --bg-card:        #1c2233;
+  --bg-input:       #1e2437;
+  --border:         #2a3347;
+  --border-hover:   #3d4f6e;
+  --accent:         #4f8ef7;
+  --accent-hover:   #6aa1ff;
+  --accent-dim:     rgba(79,142,247,0.12);
+  --text-primary:   #e8edf5;
+  --text-secondary: #8b97b0;
+  --text-muted:     #4a5568;
+  --user-bubble:    #1e40af;
+  --user-text:      #dbeafe;
+  --bot-bubble:     #1c2233;
+  --bot-text:       #e8edf5;
+  --success:        #10b981;
+  --warning:        #f59e0b;
+  --danger:         #ef4444;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: var(--bg-page);
+  color: var(--text-primary);
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Custom scrollbar ─────────────────────────── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--border-hover); }
+
+/* ── Fade-in animation for messages ──────────── */
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.msg-enter { animation: fadeSlideUp 0.22s ease both; }
+
+/* ── Pulse dot for typing indicator ──────────── */
+@keyframes typingPulse {
+  0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+  40%           { transform: scale(1);   opacity: 1; }
+}
+.typing-dot { animation: typingPulse 1.2s ease-in-out infinite; }
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+/* ── Upload drop zone highlight ──────────────── */
+@keyframes borderPulse {
+  0%, 100% { border-color: var(--accent); box-shadow: 0 0 0 0 rgba(79,142,247,0.2); }
+  50%       { border-color: var(--accent-hover); box-shadow: 0 0 0 6px rgba(79,142,247,0); }
+}
+.drop-active { animation: borderPulse 1.2s ease-in-out infinite; }
+
+/* ── Shimmer for loading skeleton ──────────── */
+@keyframes shimmer {
+  from { background-position: -400px 0; }
+  to   { background-position:  400px 0; }
+}
+.shimmer {
+  background: linear-gradient(90deg, var(--bg-card) 25%, var(--border) 50%, var(--bg-card) 75%);
+  background-size: 800px 100%;
+  animation: shimmer 1.5s infinite;
+}
